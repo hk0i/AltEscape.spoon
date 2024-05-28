@@ -1,4 +1,4 @@
---- === ControlEscape ===
+--- === AltEscape ===
 ---
 --- Make the `control` key more useful: If the `control` key is tapped, treat it
 --- as the `escape` key. If the `control` key is held down and used in
@@ -9,10 +9,10 @@ local obj={}
 obj.__index = obj
 
 -- Metadata
-obj.name = 'ControlEscape'
+obj.name = 'AltEscape'
 obj.version = '0.1'
-obj.author = 'Jason Rudolph <jason@jasonrudolph.com>'
-obj.homepage = 'https://github.com/jasonrudolph/ControlEscape.spoon'
+obj.author = 'Jason Rudolph <jason@jasonrudolph.com>, Gregory McQuillan'
+obj.homepage = 'https://github.com/hk0i/AltEscape.spoon'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
 
 function obj:init()
@@ -35,14 +35,14 @@ function obj:init()
       -- up/down state of the `control` key (i.e., it was up before and it's
       -- still up, or it was down before and it's still down), then don't take
       -- any action.
-      if self.lastModifiers['ctrl'] == newModifiers['ctrl'] then
+      if self.lastModifiers['alt'] == newModifiers['alt'] then
         return false
       end
 
       -- If the `control` key has changed to the down state, then start the
       -- timer. If the `control` key changes to the up state before the timer
       -- expires, then send `escape`.
-      if not self.lastModifiers['ctrl'] then
+      if not self.lastModifiers['alt'] then
         self.lastModifiers = newModifiers
         self.sendEscape = true
         self.controlKeyTimer:start()
@@ -69,7 +69,7 @@ function obj:init()
   )
 end
 
---- ControlEscape:start()
+--- AltEscape:start()
 --- Method
 --- Start sending `escape` when `control` is pressed and released in isolation
 function obj:start()
@@ -77,7 +77,7 @@ function obj:start()
   self.keyDownEventTap:start()
 end
 
---- ControlEscape:stop()
+--- AltEscape:stop()
 --- Method
 --- Stop sending `escape` when `control` is pressed and released in isolation
 function obj:stop()
